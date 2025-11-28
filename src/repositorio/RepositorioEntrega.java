@@ -1,6 +1,6 @@
 package repositorio;
 
-public class Repositorio extends CRUDRepositorio {
+public class RepositorioEntrega extends CRUDRepositorio {
 
 	@Override
 	public Object ler(Object chave) {
