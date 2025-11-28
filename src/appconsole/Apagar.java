@@ -5,7 +5,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
 import modelo.Entrega;
 import modelo.Entregador;
-
+import util.Util;
 
 public class Apagar {
     private ObjectContainer manager;

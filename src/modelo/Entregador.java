@@ -3,7 +3,6 @@ package modelo;
 import java.util.ArrayList;
 import java.util.List;
 
-import appconsole.Util;
 
 public class Entregador {
     private int id;

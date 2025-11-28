@@ -4,6 +4,7 @@ import com.db4o.ObjectContainer;
 import modelo.Pedido;
 import modelo.Entregador;
 import modelo.Entrega;
+import util.Util;
 
 public class Cadastrar {
     private ObjectContainer manager;
