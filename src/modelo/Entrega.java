@@ -1,5 +1,6 @@
 package modelo;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +14,12 @@ public class Entrega {
    
     public Entrega(String data) {
         this.data = data;	}
+    
+    public Entrega(Integer Id) {
+        this.id = id;	}
 
-	
-	public void adicionar(Pedido p) {
-        lista_pedidos.add(p);
+	public void adicionar(Pedido pedido) {
+        lista_pedidos.add(pedido);
     }
 
     public void remover(Pedido p) {
@@ -35,6 +38,8 @@ public class Entrega {
         return data;
     }
 
+ 
+    
     public Entregador getEntregador() {
         return entregador;
     }
@@ -42,7 +47,11 @@ public class Entrega {
     public void setEntregador(Entregador entregador) {
         this.entregador = entregador;
     }
-
+    
+    public void setData(String d) {
+        this.data = d;
+    }
+    
     public List<Pedido> getListaPedidos() {
         return lista_pedidos;
     }

@@ -52,4 +52,9 @@ public String toString() {
 	return "id: " + this.id + ","+ " nome: " + this.nome + "," + " Entregas: " + lista_entregas ;
 }
 
+
+public void setNome(String nome2) {
+	this.nome = nome2;
+}
+
 }

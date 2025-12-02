@@ -1,10 +1,12 @@
 package repositorio;
 import java.util.List;
 import com.db4o.query.Query;
+
+import modelo.Entregador;
 import modelo.Pedido;
 import util.Util;
 
-public class RepositorioPedido {
+public class RepositorioPedido  extends CRUDRepositorio<Pedido>{
 
 	
 	public Pedido lerPedido(Object chave) {
@@ -19,5 +21,49 @@ public class RepositorioPedido {
 			return null;
 		}
 				
+	}
+	
+	
+	// pedidos entre por X entregador
+	public List<Pedido> PedidosPorEntregador(Object chave){
+		String nome = (String) chave;
+		Query q2 = Util.getManager().query();
+		q2.constrain(Pedido.class);
+		q2.descend("entrega")
+		  .descend("entregador")
+		  .descend("nome")
+		  .constrain("chave");
+		
+		List<Pedido> resultados2 = q2.execute();
+		
+		if (resultados2.size()>0) {
+			System.out.println("Pedidos do entregador " + chave + ":");
+			return resultados2;
+		}else {
+		return null;
+		}
+	}
+	
+
+	public List<Pedido> ListarPedidos(){
+
+    Query q3 = Util.getManager().query(); 
+    q3.constrain(Pedido.class); 
+    List<Pedido> resultados3 = q3.execute(); 
+
+    if (resultados3.isEmpty()) {
+        System.out.println("Nenhum pedido cadastrado.");
+    } else {
+        for (Pedido p : resultados3) {
+            System.out.println(p); 
+        }
+    }
+	return resultados3;
+}
+
+	@Override
+	public Pedido ler(Object chave) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
