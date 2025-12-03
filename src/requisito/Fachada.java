@@ -19,9 +19,9 @@ public class Fachada {
     private static RepositorioEntrega EntregaRepositorio = new RepositorioEntrega();
     private static RepositorioEntregador EntregadorRepositorio = new RepositorioEntregador();
 
-    // -------------------------------------------------------------------------
+  
     //  CRIAÇÃO 
-    // -------------------------------------------------------------------------
+    
 
     public static void CriarPedido(double valor, String descricao, String localizacao) throws Exception {
         PedidoRepositorio.conectar();
@@ -76,34 +76,34 @@ public class Fachada {
         try {
             EntregadorRepositorio.begin();
 
-            // 1. Verificação de duplicidade melhorada
+           
             Entregador existente = EntregadorRepositorio.lerEntregador(nome);
             if (existente != null) {
-                // Lança erro para o "front-end" ou console saber que falhou
+                
                 throw new Exception("Erro: O entregador '" + nome + "' já está cadastrado."); 
             }
 
-            // 2. Criação
+         
             Entregador e = new Entregador(nome);
             EntregadorRepositorio.criar(e);
             
-            // 3. Confirmação
+           
             EntregadorRepositorio.commit();
-            System.out.println("Entregador criado com sucesso!"); // Log opcional
+            System.out.println("Entregador criado com sucesso!"); 
 
         } catch (Exception e) {
-            // 4. Desfaz mudanças em caso de erro
+            
             EntregadorRepositorio.rollback();
-            throw e; // Repassa o erro para quem chamou tratar (ex: mostrar na tela)
+            throw e; 
         } finally {
-            // 5. Sempre fecha a conexão
+           
             EntregadorRepositorio.desconectar();
         }
     }
 
-    // -------------------------------------------------------------------------
+ 
     //  ALTERAÇÃO 
-    // -------------------------------------------------------------------------
+
 
     public static void removerEntregaDoEntregador(String nomeEntregador, int idEntrega) throws Exception {
         EntregadorRepositorio.conectar();
@@ -140,9 +140,9 @@ public class Fachada {
         }
     }
 
-    // -------------------------------------------------------------------------
+    
     //  EXCLUSÃO
-    // -------------------------------------------------------------------------
+
 
     public static void apagarPedido(int id) throws Exception {
         PedidoRepositorio.conectar();
@@ -196,9 +196,9 @@ public class Fachada {
         }
     }
     
-    // -------------------------------------------------------------------------
+ 
     //  OUTRAS OPERAÇÕES
-    // -------------------------------------------------------------------------
+  
 
     public static void AddPedidoNaEntrega(int idPedido, int idEntrega) throws Exception {
         PedidoRepositorio.conectar(); 
@@ -231,10 +231,8 @@ public class Fachada {
         }
     }
 
-    
-    // -------------------------------------------------------------------------
     //  LISTAGENS E CONSULTAS
-    // -------------------------------------------------------------------------
+
 
     public static List<Entregador> listarEntregador() {
         EntregadorRepositorio.conectar();
