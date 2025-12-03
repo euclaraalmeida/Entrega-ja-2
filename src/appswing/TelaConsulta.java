@@ -77,21 +77,21 @@ public class TelaConsulta {
 				} else {
 					try {
 						switch (index) {
-						case 0: // Entregas por Data
+						case 0: // entregas por data
 							String data = JOptionPane.showInputDialog("Digite a data (dd/mm/aaaa):");
 							if(data != null) {
 								List<Entrega> result1 = Fachada.consultarEntregasPorData(data);
 								listarEntregas(result1);
 							}
 							break;
-						case 1: // Pedidos por Entregador
+						case 1: // eedidos por entregador
 							String nome = JOptionPane.showInputDialog("Digite o nome do Entregador:");
 							if(nome != null) {
 								List<Pedido> result2 = Fachada.consultarPedidosPorEntregador(nome);
 								listarPedidos(result2);
 							}
 							break;
-						case 2: // Entregadores Produtivos
+						case 2: // entregadores 
 							String nStr = JOptionPane.showInputDialog("Digite o número N de entregas:");
 							if(nStr != null) {
 								int n = Integer.parseInt(nStr);
@@ -110,7 +110,7 @@ public class TelaConsulta {
 		frame.getContentPane().add(button);
 	}
 
-	// Métodos auxiliares para preencher a tabela conforme o tipo de retorno
+	// preencher a tabela conforme o tipo de retorno
 
 	private void listarEntregas(List<Entrega> lista) {
 		DefaultTableModel model = new DefaultTableModel();
