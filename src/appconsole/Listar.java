@@ -1,77 +1,40 @@
 package appconsole;
 
 import java.util.List;
-
-import com.db4o.ObjectContainer;
-import com.db4o.query.Query;
-import util.Util;
-
+import requisito.Fachada;
 import modelo.Entregador;
 import modelo.Entrega;
 import modelo.Pedido;
 
 public class Listar {
-    
-    private ObjectContainer manager;
 
-    
     public Listar() {
-        
-        manager = Util.conectarBanco();
-        
-        listar(); 
-        
-        
-        Util.desconectar();
+        listar();
     }
 
-    
     public void listar() {
-        
-    	
-        System.out.println("------Lista de Entregadores---");
-        Query q1 = manager.query(); 
-        q1.constrain(Entregador.class);
-        List<Entregador> resultados1 = q1.execute(); 
+        try {
+            System.out.println("------Lista de Entregadores---");
+            List<Entregador> entregadores = Fachada.listarEntregador();
+            if (entregadores.isEmpty()) System.out.println("Nenhum entregador.");
+            for (Entregador e : entregadores) System.out.println(e);
 
-        if (resultados1.isEmpty()) {
-            System.out.println("Nenhum entregador cadastrado.");
-        } else {
-            for (Entregador e : resultados1) {
-                System.out.println(e); 
-            }
-        }
+            System.out.println("\n-------Lista de Entregas--------");
+            List<Entrega> entregas = Fachada.listarEntregas();
+            if (entregas.isEmpty()) System.out.println("Nenhuma entrega.");
+            for (Entrega e : entregas) System.out.println(e);
 
-        
-        System.out.println("-------Lista de Entregas--------");
-        Query q2 = manager.query(); 
-        q2.constrain(Entrega.class); 
-        List<Entrega> resultados2 = q2.execute();
-
-        if (resultados2.isEmpty()) {
-            System.out.println("Nenhuma entrega cadastrada.");
-        } else {
-            for (Entrega e : resultados2) {
-                System.out.println(e); 
-            }
-        }
-
-     
-        System.out.println("-------Lista de Pedidos--------");
-        Query q3 = manager.query(); 
-        q3.constrain(Pedido.class); 
-        List<Pedido> resultados3 = q3.execute(); 
-
-        if (resultados3.isEmpty()) {
-            System.out.println("Nenhum pedido cadastrado.");
-        } else {
-            for (Pedido p : resultados3) {
-                System.out.println(p); 
-            }
+            System.out.println("\n-------Lista de Pedidos--------");
+            List<Pedido> pedidos = Fachada.listarPedidos();
+            if (pedidos.isEmpty()) System.out.println("Nenhum pedido.");
+            for (Pedido p : pedidos) System.out.println(p);
+            
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
     }
 
-    	public static void main(String[] args) {
-    		new Listar();
-	}
+    public static void main(String[] args) {
+        new Listar();
+    }
 }

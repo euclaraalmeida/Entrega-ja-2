@@ -63,7 +63,7 @@ public class TelaConsulta {
 		comboBox.setModel(new DefaultComboBoxModel<>(new String[] { 
 			"Entregas por Data", 
 			"Pedidos por Entregador", 
-			"Entregadores Produtivos (N Entregas)" 
+			"Entregas com mais de N pedidos" 
 		}));
 		comboBox.setBounds(21, 10, 400, 22);
 		frame.getContentPane().add(comboBox);
