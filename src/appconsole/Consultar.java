@@ -40,9 +40,9 @@ public class Consultar {
         // 3. Entregadores com mais de N entregas
         int N = 2;
         System.out.println("\n--- 3. Entregadores com mais de " + N + " entregas ---");
-        List<Entregador> produtivos = Fachada.consultarEntregadoresProdutivos(N);
+        List<Entrega> produtivos = Fachada.consultarEntregadoresProdutivos(N);
         if (produtivos != null) {
-            for (Entregador e : produtivos) {
+            for (Entrega e : produtivos) {
                 System.out.println(e);
             }
         } else {

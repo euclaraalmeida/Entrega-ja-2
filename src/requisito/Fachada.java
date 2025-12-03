@@ -211,7 +211,11 @@ public class Fachada {
 
             Entrega e = EntregaRepositorio.lerEntrega(idEntrega);
             if (e == null) throw new Exception("Entrega não existe: " + idEntrega);
-
+            
+            if (e.getListaPedidos().size() >= 2) {
+                throw new Exception("Regra violada: A entrega " + idEntrega + " já atingiu o limite de 2 pedidos.");
+            }
+            
             e.adicionar(p);
             p.setEntrega(e);
 
@@ -227,6 +231,7 @@ public class Fachada {
         }
     }
 
+    
     // -------------------------------------------------------------------------
     //  LISTAGENS E CONSULTAS
     // -------------------------------------------------------------------------
@@ -276,9 +281,9 @@ public class Fachada {
         finally { EntregaRepositorio.desconectar(); }
     }
 
-    public static List<Entregador> consultarEntregadoresProdutivos(int n) {
+    public static List<Entrega> consultarEntregadoresProdutivos(int n) {
         EntregadorRepositorio.conectar();
-        try { return EntregadorRepositorio.EntregadorNentregas(n); } 
+        try { return EntregaRepositorio.consultarEntregasComMaisDeNPedidos(n); } 
         finally { EntregadorRepositorio.desconectar(); }
     }
 

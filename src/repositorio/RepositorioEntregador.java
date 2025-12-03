@@ -1,4 +1,5 @@
 package repositorio;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.db4o.ObjectContainer;
@@ -11,8 +12,6 @@ import util.Util;
 
 public class RepositorioEntregador  extends CRUDRepositorio<Entregador>{
 	
-
-
 	
 	public Entregador lerEntregador(Object chave) {
 		String nome = (String) chave;
@@ -27,66 +26,25 @@ public class RepositorioEntregador  extends CRUDRepositorio<Entregador>{
 		}
 	
 	}
-	     //listar quais os entregadores que tem mais N entregas
-		
-       class Filtro implements Evaluation {
-           private int n;
-
-           public Filtro(Object n2) {
-               this.n = (int) n2;
-           }
-
-          
-           public void evaluate(Candidate candidate) {
-               Entregador e = (Entregador) candidate.getObject();
-               if (e.getListaEntregas().size() > n) {
-                   candidate.include(true);
-               }else {
-                   candidate.include(false);
-           }
-           }
-       }
-		
-       
-       
-       public List<Entregador> EntregadorNentregas(Object N) {
-       
-	       Query queryEntregaFiltro = Util.getManager().query();
-	       queryEntregaFiltro.constrain(Entregador.class);
-	       queryEntregaFiltro.constrain(new Filtro(N)); // aplica o filtro
-	
-	       List<Entregador> EntregadorComNEntregas = queryEntregaFiltro.execute();
-	
-	       if (EntregadorComNEntregas.isEmpty()) {
-	           return null;
-	       } else {
-	           System.out.println("Entregadore(s) com mais de " + N + " entregas:");
-	           for (Entregador e : EntregadorComNEntregas) {
-	               System.out.println(e);
-	           }
-	           return EntregadorComNEntregas; 
-
-	       }
-       }
-
-
+	    
    	
    	// Listar 
-	   	public List<Entregador> ListarEntregador(){
-	   		System.out.println("------Lista de Entregadores---");
-	   	    Query q1 = Util.getManager().query(); 
-	   	    q1.constrain(Entregador.class);
-	   	    List<Entregador> resultados1 = q1.execute(); 
-	   	
-	   	    if (resultados1.isEmpty()) {
-	   	        System.out.println("Nenhum entregador cadastrado.");
-	   	    } else {
-	   	        for (Entregador e : resultados1) {
-	   	            System.out.println(e); 
-	   	        }
-	   	    }
-	   		return null;}
-       
+       public List<Entregador> ListarEntregador() {
+           System.out.println("------Lista de Entregadores---");
+           Query q1 = Util.getManager().query(); 
+           q1.constrain(Entregador.class);
+           List<Entregador> resultados1 = q1.execute(); 
+
+           if (resultados1.isEmpty()) {
+               System.out.println("Nenhum entregador cadastrado.");
+           } else {
+               for (Entregador e : resultados1) {
+                   System.out.println(e); 
+               }
+           }
+           
+           return new ArrayList<>(resultados1); 
+       }
 	   @Override
 	   public Entregador ler(Object chave) {
 		// TODO Auto-generated method stub

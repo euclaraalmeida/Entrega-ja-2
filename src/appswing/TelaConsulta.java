@@ -95,8 +95,8 @@ public class TelaConsulta {
 							String nStr = JOptionPane.showInputDialog("Digite o número N de entregas:");
 							if(nStr != null) {
 								int n = Integer.parseInt(nStr);
-								List<Entregador> result3 = Fachada.consultarEntregadoresProdutivos(n);
-								listarEntregadores(result3);
+								List<Entrega> result3 = Fachada.consultarEntregadoresProdutivos(n);
+								listarEntregas(result3);
 							}
 							break;
 						}

@@ -1,4 +1,5 @@
 package repositorio;
+import java.util.ArrayList;
 import java.util.List;
 import com.db4o.query.Query;
 
@@ -32,13 +33,13 @@ public class RepositorioPedido  extends CRUDRepositorio<Pedido>{
 		q2.descend("entrega")
 		  .descend("entregador")
 		  .descend("nome")
-		  .constrain("chave");
+		  .constrain(nome);
 		
 		List<Pedido> resultados2 = q2.execute();
 		
 		if (resultados2.size()>0) {
 			System.out.println("Pedidos do entregador " + chave + ":");
-			return resultados2;
+		    return new ArrayList<>(resultados2); 
 		}else {
 		return null;
 		}
@@ -47,18 +48,18 @@ public class RepositorioPedido  extends CRUDRepositorio<Pedido>{
 
 	public List<Pedido> ListarPedidos(){
 
-    Query q3 = Util.getManager().query(); 
-    q3.constrain(Pedido.class); 
-    List<Pedido> resultados3 = q3.execute(); 
-
-    if (resultados3.isEmpty()) {
-        System.out.println("Nenhum pedido cadastrado.");
-    } else {
-        for (Pedido p : resultados3) {
-            System.out.println(p); 
-        }
-    }
-	return resultados3;
+	    Query q3 = Util.getManager().query(); 
+	    q3.constrain(Pedido.class); 
+	    List<Pedido> resultados3 = q3.execute(); 
+	
+	    if (resultados3.isEmpty()) {
+	        System.out.println("Nenhum pedido cadastrado.");
+	    } else {
+	        for (Pedido p : resultados3) {
+	            System.out.println(p); 
+	        }
+	    }
+	    return new ArrayList<>(resultados3); 
 }
 
 	@Override
