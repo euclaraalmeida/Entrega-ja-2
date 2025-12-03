@@ -7,17 +7,13 @@ public class Alterar {
     public Alterar() {
         try {
             System.out.println("Iniciando alteração...");
-            
-
             Fachada.removerEntregaDoEntregador("Lucas", 6);
-            
             System.out.println("Relacionamento removido com sucesso via Fachada.");
 
         } catch (Exception e) {
             System.out.println("Erro ao alterar: " + e.getMessage());
         }
     }
-
     public static void main(String[] args) {
         new Alterar();
     }
