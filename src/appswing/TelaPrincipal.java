@@ -54,10 +54,7 @@ public class TelaPrincipal {
 		label.setText("Sistema Iniciado");
 		label.setBounds(0, 0, frame.getWidth(), frame.getHeight());
 		
-		// Se tiver imagem, descomente as linhas abaixo e crie a pasta imagens
-		// ImageIcon imagem = new ImageIcon(getClass().getResource("/imagens/entrega.jpg"));
-		// imagem = new ImageIcon(imagem.getImage().getScaledInstance(label.getWidth(),label.getHeight(), Image.SCALE_DEFAULT));
-		// label.setIcon(imagem);
+		
 		
 		frame.getContentPane().add(label);
 
