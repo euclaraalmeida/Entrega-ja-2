@@ -75,19 +75,28 @@ public class Fachada {
         EntregadorRepositorio.conectar();
         try {
             EntregadorRepositorio.begin();
-            // Validamos pelo nome, pois o ID é gerado pelo sistema
-            if (EntregadorRepositorio.lerEntregador(nome) != null) {
-                // Se já existe, não cria de novo (regra de negócio opcional)
-                return; 
+
+            // 1. Verificação de duplicidade melhorada
+            Entregador existente = EntregadorRepositorio.lerEntregador(nome);
+            if (existente != null) {
+                // Lança erro para o "front-end" ou console saber que falhou
+                throw new Exception("Erro: O entregador '" + nome + "' já está cadastrado."); 
             }
 
+            // 2. Criação
             Entregador e = new Entregador(nome);
             EntregadorRepositorio.criar(e);
+            
+            // 3. Confirmação
             EntregadorRepositorio.commit();
+            System.out.println("Entregador criado com sucesso!"); // Log opcional
+
         } catch (Exception e) {
+            // 4. Desfaz mudanças em caso de erro
             EntregadorRepositorio.rollback();
-            throw e;
+            throw e; // Repassa o erro para quem chamou tratar (ex: mostrar na tela)
         } finally {
+            // 5. Sempre fecha a conexão
             EntregadorRepositorio.desconectar();
         }
     }
@@ -222,18 +231,39 @@ public class Fachada {
     //  LISTAGENS E CONSULTAS
     // -------------------------------------------------------------------------
 
-    public static List<Entregador> listarEntregador(){
+    public static List<Entregador> listarEntregador() {
         EntregadorRepositorio.conectar();
-        try { return EntregadorRepositorio.ListarEntregador(); } 
-        finally { EntregadorRepositorio.desconectar(); }
+        try {
+            List<Entregador> lista = EntregadorRepositorio.ListarEntregador();
+
+            if (lista == null) {
+                return new ArrayList<>(); 
+            }
+
+            for (Entregador e : lista) {
+                e.getListaEntregas().size(); 
+            }
+            
+            return lista;
+        } catch (Exception e) {
+            System.out.println("Erro ao listar: " + e.getMessage());
+            return new ArrayList<>(); 
+        } finally {
+            EntregadorRepositorio.desconectar();
+        }
     }
-    
     public static List<Entrega> listarEntregas(){
         EntregaRepositorio.conectar();
-        try { return EntregaRepositorio.ListarEntregas(); } 
+        try { 
+            List<Entrega> lista = EntregaRepositorio.ListarEntregas();
+            for(Entrega e : lista) {
+                if(e.getEntregador() != null) e.getEntregador().getNome();
+                e.getListaPedidos().size();
+            }
+            return lista;
+        } 
         finally { EntregaRepositorio.desconectar(); }
     }
-    
     public static List<Pedido> listarPedidos(){
         PedidoRepositorio.conectar();
         try { return PedidoRepositorio.ListarPedidos(); } 
