@@ -7,8 +7,6 @@ public class Cadastrar {
     public Cadastrar() {
         try {
             System.out.println("Cadastrando dados...");
-
-            
             Fachada.CriarEntregador("João");
             Fachada.CriarEntregador("Maria");
             Fachada.CriarEntregador("Lucas");
@@ -23,23 +21,16 @@ public class Cadastrar {
 
             Fachada.CriarEntrega("22/10/2025", "João");
             Fachada.CriarEntrega("23/10/2025", "João");
-            
             Fachada.CriarEntrega("24/10/2025", "Maria");
             Fachada.CriarEntrega("25/10/2025", "Maria");
             Fachada.CriarEntrega("26/10/2025", "Maria");
-            
             Fachada.CriarEntrega("27/10/2025", "Lucas");
-            
             Fachada.CriarEntrega("28/10/2025", "Matheus");
-            Fachada.CriarEntrega("29/10/2025", "Matheus");
-            
-            Fachada.CriarEntrega("30/10/2025", "Fausto");
-            
-            Fachada.CriarEntrega("31/10/2025", "Mariana");
-            
+            Fachada.CriarEntrega("29/10/2025", "Matheus");          
+            Fachada.CriarEntrega("30/10/2025", "Fausto");            
+            Fachada.CriarEntrega("31/10/2025", "Mariana");            
             Fachada.CriarEntrega("01/11/2025", "Davi");
-            Fachada.CriarEntrega("02/11/2025", "Davi");
-            
+            Fachada.CriarEntrega("02/11/2025", "Davi");            
             Fachada.CriarEntrega("03/11/2025", "Arthur");
             Fachada.CriarEntrega("04/11/2025", "Clara");
             Fachada.CriarEntrega("05/11/2025", "Laura");
@@ -60,7 +51,7 @@ public class Cadastrar {
 
            
             
-            // João (Entregas IDs supostos 1 e 2)
+            // João (Entregas ID 1 e 2)
             Fachada.AddPedidoNaEntrega(1, 1); // Pedido 1 na Entrega 1
             Fachada.AddPedidoNaEntrega(2, 2); // Pedido 2 na Entrega 2
             Fachada.AddPedidoNaEntrega(3, 2); // Pedido 3 na Entrega 2
